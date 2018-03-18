@@ -7,7 +7,7 @@ var fruitSchema = mongoose.Schema({
 		required : true
 	},
 	price:{
-		type:Number,
+		type:String,
 		required : true
 	},
 	create_date:{
@@ -20,4 +20,7 @@ var fruits = module.exports = mongoose.model("fruits",fruitSchema);
 
 module.exports.getFruits = function(callback,limit){
 	fruits.find(callback).limit(limit);
-}
+};
+module.exports.addFruit = function(fruit,callback){
+	fruits.create(fruit,callback);
+};

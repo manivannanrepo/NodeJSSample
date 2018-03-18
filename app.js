@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
+app.use(bodyParser.json());
 fruits = require('./models/fruits')
 // Connect to Mongoose
 mongoose.connect('mongodb://localhost/mani');
@@ -19,7 +19,20 @@ app.get('/api/fruits',function(req,res){
 			throw err;
 		}
 		res.json(fruits);
-	})
+	});
+
+});
+
+app.post('/api/addfruit',function(req,res){
+
+	var fruit = req.body;
+
+	fruits.addFruit(fruit, function(err,fruit){
+		if (err) {
+			throw err;
+		}
+		res.json(fruit);
+	});
 
 });
 
